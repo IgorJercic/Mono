@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore;
 using Project.Service.Models;
 using ProjectMono.Models;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Project.Service;
 using System.Collections.Generic;
 using X.PagedList;
 using System.Diagnostics;
+using Ninject;
 
 namespace ProjectMono.Controllers
 {
@@ -18,52 +18,28 @@ namespace ProjectMono.Controllers
     {
        
         // Constructor injection
-        private readonly IVehicleMakeRepository context;
-        private readonly IMapper mapper;
+        private readonly IVehicleMakeRepository DbContext;
+        private readonly IMapper Mapper;
+
         public HomeMapperController(IVehicleMakeRepository context, IMapper mapper)
         {
-            this.context = context;
-            this.mapper = mapper;
+            this.DbContext = context;
+            this.Mapper = mapper;
         }
+
+        
+
+
         public  IActionResult Index(string sortOrder, string searchString, string currentFilter, int? page)
         {
-            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["AbrvSortParm"] = String.IsNullOrEmpty(sortOrder) ? "abrv_desc" : "";
-            ViewData["CurrentFilter"] = searchString;
-            ViewData["CurrentSort"] = sortOrder;
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-            ViewData["CurrentFilter"] = searchString;
             var pageNumber = page ?? 1;
-
             //no matter what, this code is fill a container
-            var model = context.GetAllVehicleMakes();
-            var mapper_model = mapper.Map<List<VehicleMakeDTO>>(model);
-            var mapperForView = mapper.Map<List<VehicleMakeDTO>>(model);
-
-            //in search case 
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                var  mapperForViewSearch = mapper_model.Where(x => x.Name.Contains(searchString) || x.Abrv.Contains(searchString));
-                return View(mapperForViewSearch.ToList().ToPagedList(pageNumber, 5));
-            }
-           
-            switch (sortOrder)
-            {
-                case "name_desc":
-                    mapperForView = mapperForView.OrderBy(x => x.Name).ToList();
-                    break;
-                case "abrv_desc":
-                    mapperForView = mapperForView.OrderBy(x => x.Abrv).ToList();
-                    break;
-            }
+            //var model = DbContext.GetAllVehicleMakes(sortOrder, searchString, currentFilter, page);
+            var model = DbContext.GetAllVehicleMakes();
+            var mapper_model = Mapper.Map<List<VehicleMakeDTO>>(model);
+            var mapperForView = Mapper.Map<List<VehicleMakeDTO>>(model);
             return View(mapperForView.ToList().ToPagedList(pageNumber, 5));
+            
         }
 
         [HttpGet]
@@ -74,7 +50,7 @@ namespace ProjectMono.Controllers
             {
                 return NotFound();
             }
-            var vehicleMake = await context.GetVehicle(ID);
+            var vehicleMake = await DbContext.GetVehicleMake(ID);
             if (vehicleMake == null)
             {
                 return NotFound();
@@ -90,7 +66,7 @@ namespace ProjectMono.Controllers
             {
                 return NotFound();
             }
-            var vehicleMake = await context.GetVehicle(ID);
+            var vehicleMake = await DbContext.GetVehicleMake(ID);
             if(vehicleMake == null)
             {
                 return NotFound();
@@ -112,7 +88,7 @@ namespace ProjectMono.Controllers
             {
                 try
                 {
-                   await context.UpdateVehicleMake(vehicle);
+                   await DbContext.UpdateVehicleMake(vehicle);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -137,7 +113,7 @@ namespace ProjectMono.Controllers
         {
             if (ModelState.IsValid)
             {
-                await context.AddNew(vehicleMake);
+                await DbContext.AddNewVehicleMake(vehicleMake);
                 return RedirectToAction(nameof(Index));
             }
             return View(vehicleMake);
@@ -145,7 +121,7 @@ namespace ProjectMono.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            await context.Delete(id);
+            await DbContext.DeleteVehicleMake(id);
             return RedirectToAction("Index");
         }
 

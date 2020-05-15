@@ -6,25 +6,22 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Project.Service;
 using Project.Service.Models;
 using ProjectMono.Models;
 using X.PagedList;
-//using ProjectMono.Models;
 
 namespace ProjectMono.Controllers
 {
     public class VehicleModelsController : Controller
     {
-        private readonly Project.Service.Models.IVehicleModelRepository context;
-        //private readonly IVehicleModelRepository _contextM;
-        private readonly IMapper _mapper;
+        private readonly Project.Service.Models.IVehicleModelRepository DbContext;
+        private readonly IMapper Mapper;
         public VehicleModelsController(IVehicleModelRepository context, IMapper mapper)
         {
-            this.context = context;
-            _mapper = mapper;
+            this.DbContext = context;
+            this.Mapper = mapper;
 
         }
 
@@ -47,9 +44,9 @@ namespace ProjectMono.Controllers
             var pageNumber = page ?? 1;
             ViewData["CurrentFilter"] = searchString;
 
-            var vehicleModel = context.GetAllVehicleModels();
-            var mapperModel = _mapper.Map<List<VehicleModelDTO>>(vehicleModel);
-            var mapperForView = _mapper.Map<List<VehicleModelDTO>>(vehicleModel);
+            var vehicleModel = DbContext.GetAllVehicleModels();
+            var mapperModel = Mapper.Map<List<VehicleModelDTO>>(vehicleModel);
+            var mapperForView = Mapper.Map<List<VehicleModelDTO>>(vehicleModel);
 
 
             if (!String.IsNullOrEmpty(searchString))
@@ -67,7 +64,7 @@ namespace ProjectMono.Controllers
                     mapperForView = mapperForView.OrderBy(x => x.Abrv).ToList();
                     break;
             }
-            ViewBag.VehicleMakes = context.GetVehicleMakes();
+            ViewBag.VehicleMakes = DbContext.GetVehicleMakes();
             return View(await mapperForView.ToList().ToPagedListAsync(pageNumber, 5));
           
         }
@@ -80,19 +77,19 @@ namespace ProjectMono.Controllers
                 return NotFound();
             }
             int ID = id.GetValueOrDefault();
-            var vehicleModel = await context.GetModel(ID);
+            var vehicleModel = await DbContext.GetVehicleModel(ID);
             if (vehicleModel == null)
             {
                 return NotFound();
             }
-            ViewBag.VehicleMakes = context.GetVehicleMakes();
+            ViewBag.VehicleMakes = DbContext.GetVehicleMakes();
             return View(vehicleModel);
         }
 
         // GET: VehicleModels/Create
         public IActionResult Create()
         {
-            var CarMakeModel = context.GetVehicleMakes().ToList();
+            var CarMakeModel = DbContext.GetVehicleMakes().ToList();
             CarMakeModel.Insert(0, new VehicleMake { Id = 0, Name = "Select" });
             ViewBag.List = CarMakeModel;
             return View();
@@ -106,7 +103,7 @@ namespace ProjectMono.Controllers
             vehicleModel.Name = name;
             vehicleModel.Abrv = abrv;
             vehicleModel.MakeId = MakeId;
-           await context.AddNew(vehicleModel);
+           await DbContext.AddNewVehicleModel(vehicleModel);
            return RedirectToAction(nameof(Index));
         }
 
@@ -119,14 +116,14 @@ namespace ProjectMono.Controllers
                 return NotFound();
             }
             int ID = id.GetValueOrDefault();
-            var vehicleModel = await context.GetModel(ID);
+            var vehicleModel = await DbContext.GetVehicleModel(ID);
             if (vehicleModel == null)
             {
                 return NotFound();
             }
 
             //needs for listing car makes
-            var CarMakeModel = context.GetVehicleMakes().ToList();
+            var CarMakeModel = DbContext.GetVehicleMakes().ToList();
             CarMakeModel.Insert(0, new VehicleMake { Id = 0, Name = "Select" });
             ViewBag.List = CarMakeModel;
             return View(vehicleModel);
@@ -145,7 +142,7 @@ namespace ProjectMono.Controllers
             {
                 try
                 {
-                    await context.UpdateVehicleModel(vehicleModel);
+                    await DbContext.UpdateVehicleModel(vehicleModel);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -170,7 +167,7 @@ namespace ProjectMono.Controllers
             {
                 return NotFound();
             }
-            var vehicleModel = await context.GetModel(id);
+            var vehicleModel = await DbContext.GetVehicleModel(id);
             if (vehicleModel == null)
             {
                 return NotFound();
@@ -184,14 +181,14 @@ namespace ProjectMono.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
 
-            var vehicleModel = await context.GetModel(id);
-            await context.Delete(id);
+            var vehicleModel = await DbContext.GetVehicleModel(id);
+            await DbContext.DeleteVehicleModel(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool VehicleModelExists(int id)
         {
-            if(context.GetModel(id) != null)
+            if(DbContext.GetVehicleModel(id) != null)
             {
                 return true;
             }
