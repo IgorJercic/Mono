@@ -6,4 +6,12 @@ C:\Users\IGZYY\Documents\GitHub\Mono\ProjectMono\Project.Service\obj\Debug\netst
 C:\Users\IGZYY\Documents\GitHub\Mono\ProjectMono\Project.Service\obj\Debug\netstandard2.0\Project.Service.AssemblyInfo.cs
 C:\Users\IGZYY\Documents\GitHub\Mono\ProjectMono\Project.Service\obj\Debug\netstandard2.0\Project.Service.dll
 C:\Users\IGZYY\Documents\GitHub\Mono\ProjectMono\Project.Service\obj\Debug\netstandard2.0\Project.Service.pdb
-C:\Users\IGZYY\Documents\GitHub\Mono\ProjectMono\Project.Service\obj\Debug\netstandard2.0\Project.Service.csprojAssemblyReference.cache
+C:\Users\Igzyy\source\repos\Mono\ProjectMono\Project.Service\obj\Debug\netstandard2.0\Project.Service.dll
+C:\Users\Igzyy\source\repos\Mono\ProjectMono\Project.Service\obj\Debug\netstandard2.0\Project.Service.pdb
+C:\Users\Igzyy\source\repos\Mono\ProjectMono\Project.Service\obj\Debug\netstandard2.0\Project.Service.AssemblyInfoInputs.cache
+C:\Users\Igzyy\source\repos\Mono\ProjectMono\Project.Service\obj\Debug\netstandard2.0\Project.Service.AssemblyInfo.cs
+C:\Users\Igzyy\source\repos\Mono\ProjectMono\Project.Service\bin\Debug\netstandard2.0\Project.Service.deps.json
+C:\Users\Igzyy\source\repos\Mono\ProjectMono\Project.Service\bin\Debug\netstandard2.0\Project.Service.dll
+C:\Users\Igzyy\source\repos\Mono\ProjectMono\Project.Service\bin\Debug\netstandard2.0\Project.Service.pdb
+C:\Users\Igzyy\source\repos\Mono\ProjectMono\Project.Service\obj\Debug\netstandard2.0\Project.Service.csproj.CoreCompileInputs.cache
+C:\Users\Igzyy\source\repos\Mono\ProjectMono\Project.Service\obj\Debug\netstandard2.0\Project.Service.csprojAssemblyReference.cache

@@ -9,7 +9,7 @@ using Project.Service.Models;
 
 namespace ProjectMono.Migrations
 {
-    [DbContext(typeof(Project.Service.Models.DbContext))]
+    [DbContext(typeof(Project.Service.Models.ProjectDbContext))]
     [Migration("20200404165347_initD2")]
     partial class initD2
     {

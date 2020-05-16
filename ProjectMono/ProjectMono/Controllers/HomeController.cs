@@ -6,7 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using Project.Service.Models;
 using ProjectMono.Models;
 using AutoMapper;
-using AutoMapper.QueryableExtensions;
 using Project.Service;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,14 +18,13 @@ namespace ProjectMono.Controllers
         /// <summary>
         /// Constructor injection
         /// </summary>
-        private readonly Project.Service.Models.DbContext context;
-        // private readonly IMonoRepositry _context;
-        private readonly IMapper _mapper;
+        private readonly ProjectDbContext DbContext;
+        private readonly IMapper Mapper;
 
-        public HomeController(Project.Service.Models.DbContext context, IMapper mapper)
+        public HomeController(ProjectDbContext context, IMapper mapper)
         {
-            this.context = context;
-            _mapper = mapper;
+            this.DbContext = context;
+            Mapper = mapper;
         }
         public async Task<IActionResult> Index(string sortOrder, string searchString, string currentFilter, int? pageNumber)
         {
@@ -47,7 +45,7 @@ namespace ProjectMono.Controllers
             ViewData["CurrentFilter"] = searchString;
 
             //no matter what, this code is fill a container
-            var vehicleMake = from v in context.vehicleMakes
+            var vehicleMake = from v in DbContext.vehicleMakes
                                select v;
 
             if (!string.IsNullOrEmpty(searchString))
@@ -66,9 +64,11 @@ namespace ProjectMono.Controllers
             }
 
             int pageSize = 5;
-            var mappetList = _mapper.Map<List<VehicleMakeDTO>>(vehicleMake);
+            var mappetList = Mapper.Map<List<VehicleMakeDTO>>(vehicleMake);
 
             return View(await Models.PaginatedList<VehicleMake>.CreateAsync(vehicleMake.AsNoTracking(), pageNumber ?? 1, pageSize));
+
+           
             #endregion
 
 
@@ -82,7 +82,7 @@ namespace ProjectMono.Controllers
                 return NotFound();
             }
 
-            var vehicleMake = await context.vehicleMakes.FindAsync(id);
+            var vehicleMake = await DbContext.vehicleMakes.FindAsync(id);
             if (vehicleMake == null)
             {
                 return NotFound();
@@ -99,7 +99,7 @@ namespace ProjectMono.Controllers
                 return NotFound();
             }
 
-            var model = await context.vehicleMakes.FindAsync(id);
+            var model = await DbContext.vehicleMakes.FindAsync(id);
             if (model == null)
             {
                 return NotFound();
@@ -120,8 +120,8 @@ namespace ProjectMono.Controllers
             {
                 try
                 {
-                    context.Update(vehicle);
-                    await context.SaveChangesAsync();
+                    DbContext.Update(vehicle);
+                    await DbContext.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -151,8 +151,8 @@ namespace ProjectMono.Controllers
         {
             if (ModelState.IsValid)
             {
-                context.Add(vehicleMake);
-                await context.SaveChangesAsync();
+                DbContext.Add(vehicleMake);
+                await DbContext.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
 
             }
@@ -161,14 +161,14 @@ namespace ProjectMono.Controllers
 
         public IActionResult Delete(int id)
         {
-            VehicleMake vehicle = context.vehicleMakes.Find(id);
+            VehicleMake vehicle = DbContext.vehicleMakes.Find(id);
             if (vehicle != null)
             {
                 var commandText = "delete from VehicleModel where MakeId = @id";
                 var vehicle_model = new SqlParameter("@id", id);
-                context.Database.ExecuteSqlCommand(commandText, vehicle_model);
-                context.vehicleMakes.Remove(vehicle);
-                context.SaveChanges();
+                DbContext.Database.ExecuteSqlCommand(commandText, vehicle_model);
+                DbContext.vehicleMakes.Remove(vehicle);
+                DbContext.SaveChanges();
             }
             //return RedirectToAction("Index/");
             return View();
@@ -204,7 +204,7 @@ namespace ProjectMono.Controllers
         /// 
         private bool VehicleMakeExists(int id)
         {
-            return context.vehicleMakes.Any(e => e.Id == id);
+            return DbContext.vehicleMakes.Any(e => e.Id == id);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
