@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\ProjectMono\\ProjectMono.csproj": {}
+    "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\ProjectMono\\ProjectMono.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\Project.Service\\Project.Service.csproj": {
+    "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\Project.Service\\Project.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\Project.Service\\Project.Service.csproj",
+        "projectUniqueName": "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\Project.Service\\Project.Service.csproj",
         "projectName": "Project.Service",
-        "projectPath": "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\Project.Service\\Project.Service.csproj",
+        "projectPath": "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\Project.Service\\Project.Service.csproj",
         "packagesPath": "C:\\Users\\Igzyy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\Project.Service\\obj\\",
+        "outputPath": "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\Project.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -70,14 +70,14 @@
         }
       }
     },
-    "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\ProjectMono\\ProjectMono.csproj": {
+    "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\ProjectMono\\ProjectMono.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\ProjectMono\\ProjectMono.csproj",
+        "projectUniqueName": "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\ProjectMono\\ProjectMono.csproj",
         "projectName": "ProjectMono",
-        "projectPath": "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\ProjectMono\\ProjectMono.csproj",
+        "projectPath": "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\ProjectMono\\ProjectMono.csproj",
         "packagesPath": "C:\\Users\\Igzyy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\ProjectMono\\obj\\",
+        "outputPath": "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\ProjectMono\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -96,8 +96,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\Project.Service\\Project.Service.csproj": {
-                "projectPath": "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\Project.Service\\Project.Service.csproj"
+              "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\Project.Service\\Project.Service.csproj": {
+                "projectPath": "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\Project.Service\\Project.Service.csproj"
               }
             }
           }

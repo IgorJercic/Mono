@@ -14,9 +14,7 @@ namespace Project.Service.Models
         Task<VehicleModel> UpdateVehicleModel(VehicleModel vehicleModelChanges);
         Task<VehicleModel> AddNewVehicleModel(VehicleModel vehicle);
         Task<VehicleModel> DeleteVehicleModel(int id);
-  
         IEnumerable<VehicleMake> GetVehicleMakes();
-
         IQueryable<VehicleModel> GetVehicleModelsIQueryable(IEnumerable<VehicleModel> vehicleModels);
     }
 }

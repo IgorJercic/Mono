@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "MeEOcygjb2iRlaRTkbBIrlOVeQIdTJOTsQHohv7sRuzb+z0IcUaMlQnUBGvCMExByNeYJc/DdnNcHpIdT1zeSQ==",
+  "dgSpecHash": "KNShAEDmmuoijnZxoIky6gKXqL/QiFSb4czRPcYThXFq3RSPQDW6Q4X5qM8AF2I9rgjB+DALDNVwtqprdkUHKg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Igzyy\\source\\repos\\Mono\\ProjectMono\\ProjectMono\\ProjectMono.csproj",
+  "projectFilePath": "C:\\Users\\Igzyy\\Documents\\GitHub\\Mono\\ProjectMono\\ProjectMono\\ProjectMono.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Igzyy\\.nuget\\packages\\autofac\\5.0.0\\autofac.5.0.0.nupkg.sha512",
     "C:\\Users\\Igzyy\\.nuget\\packages\\autofac.extensions.dependencyinjection\\6.0.0\\autofac.extensions.dependencyinjection.6.0.0.nupkg.sha512",

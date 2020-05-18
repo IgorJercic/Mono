@@ -14,8 +14,10 @@ namespace Project.Service.DataContext
             //string connectionSqlString = "server=DESKTOP-1JOC7A2\\SQLEXPRESS;database=Mono;Trusted_Connection=true";
             AppSettings appSettings = new AppSettings();
             var opsBuild = new DbContextOptionsBuilder<ProjectDbContext>();
+
              opsBuild.UseSqlServer(appSettings.connectionSqlString);
             //opsBuild.UseSqlServer(connectionSqlString);
+
             return new ProjectDbContext(opsBuild.Options);
         }
     }
